@@ -1,21 +1,15 @@
 import { useState } from 'react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Trash2, Save, Briefcase, Loader2, Sparkles } from 'lucide-react'
+import { Plus, Trash2, Briefcase } from 'lucide-react'
 import { WorkExperience } from '../../types'
-import { workExperienceService } from '../../services/resumeService'
 
 interface ExperienceFormProps {
     resumeId: number
     resume: any
 }
 
-export default function ExperienceForm({ resumeId }: ExperienceFormProps) {
+export default function ExperienceForm({ resumeId: _resumeId }: ExperienceFormProps) {
     const [experiences, setExperiences] = useState<WorkExperience[]>([])
-
-    const addExperienceMutation = useMutation({
-        mutationFn: (data: WorkExperience) => workExperienceService.addWorkExperience(resumeId, data),
-    })
 
     const addExperience = () => {
         const newExperience: WorkExperience = {

@@ -1,11 +1,9 @@
-import { useRef } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import {
     LayoutDashboard,
     FileText,
     Palette,
     Sparkles,
-    Settings,
     ChevronLeft,
 } from 'lucide-react'
 import { useUiStore } from '../../store/useUiStore'

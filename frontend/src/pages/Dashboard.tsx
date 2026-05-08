@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Plus, FileText, Clock, CheckCircle, Trash2, Copy, MoreHorizontal } from 'lucide-react'
+import { Plus, FileText, Clock, CheckCircle } from 'lucide-react'
 import { Resume } from '../types'
 import { resumeService } from '../services/resumeService'
 
@@ -13,14 +13,8 @@ export default function Dashboard() {
         queryFn: resumeService.getAllResumes,
     })
 
-    const handleCreateNew = async () => {
-        const newResume = await resumeService.createResume({
-            title: 'Untitled Resume',
-            templateType: 'MODERN' as const,
-        })
-        if (newResume.id) {
-            navigate(`/builder/${newResume.id}`)
-        }
+    const handleCreateNew = () => {
+        navigate('/templates')
     }
 
     return (

@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
-import { Check, ArrowRight } from 'lucide-react'
+import { Check, ArrowRight, Loader2 } from 'lucide-react'
 import { TemplateType } from '../types'
+import { resumeService } from '../services/resumeService'
 
 const templates = [
     {
@@ -33,11 +35,36 @@ const templates = [
         features: ['Vibrant colors', 'Innovative layout', 'Stand out'],
         color: 'from-purple-600 to-pink-500',
     },
+    {
+        id: TemplateType.OVERLEAF,
+        name: 'LaTeX (Overleaf)',
+        description: 'A classic Academic/Professional LaTeX style common on Overleaf',
+        features: ['Classic Serif', 'Jake\'s Resume style', 'Academic feel'],
+        color: 'from-gray-300 to-gray-500',
+    },
 ]
 
 export default function Templates() {
     const [selectedTemplate, setSelectedTemplate] = useState<TemplateType>(TemplateType.MODERN)
     const navigate = useNavigate()
+    const queryClient = useQueryClient()
+
+    const createResumeMutation = useMutation({
+        mutationFn: (templateType: TemplateType) => resumeService.createResume({
+            title: 'Untitled Resume',
+            templateType
+        }),
+        onSuccess: (newResume) => {
+            queryClient.invalidateQueries({ queryKey: ['resumes'] })
+            if (newResume.id) {
+                navigate(`/builder/${newResume.id}`)
+            }
+        },
+    })
+
+    const handleContinue = () => {
+        createResumeMutation.mutate(selectedTemplate)
+    }
 
     return (
         <div className="max-w-6xl mx-auto space-y-6">
@@ -98,11 +125,18 @@ export default function Templates() {
 
             <div className="flex justify-end mt-8">
                 <button
-                    onClick={() => navigate('/builder')}
-                    className="btn-primary gap-2"
+                    onClick={handleContinue}
+                    disabled={createResumeMutation.isPending}
+                    className="btn-primary gap-2 disabled:opacity-50"
                 >
-                    Continue with {templates.find((t) => t.id === selectedTemplate)?.name}
-                    <ArrowRight className="h-4 w-4" />
+                    {createResumeMutation.isPending ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                        <>
+                            Continue with {templates.find((t) => t.id === selectedTemplate)?.name}
+                            <ArrowRight className="h-4 w-4" />
+                        </>
+                    )}
                 </button>
             </div>
         </div>

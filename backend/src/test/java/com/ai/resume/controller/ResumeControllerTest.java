@@ -3,6 +3,8 @@ package com.ai.resume.controller;
 import com.ai.resume.dto.request.ResumeCreateRequest;
 import com.ai.resume.dto.response.ResumeResponse;
 import com.ai.resume.enums.TemplateType;
+import com.ai.resume.exception.ResourceNotFoundException;
+import com.ai.resume.mapper.ResumeMapper;
 import com.ai.resume.service.ResumeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -25,6 +27,9 @@ class ResumeControllerTest {
 
     @MockBean
     private ResumeService resumeService;
+
+    @MockBean
+    private ResumeMapper resumeMapper;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -55,6 +60,7 @@ class ResumeControllerTest {
 
     @Test
     void testGetResumeById_notFound() throws Exception {
+        when(resumeService.getResumeById(999L)).thenThrow(new ResourceNotFoundException("Resume", 999L));
         mockMvc.perform(get("/api/v1/resumes/999"))
                 .andExpect(status().isNotFound());
     }

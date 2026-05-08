@@ -1,21 +1,15 @@
 import { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Trash2, GraduationCap, Loader2 } from 'lucide-react'
+import { Plus, Trash2, GraduationCap } from 'lucide-react'
 import { Education } from '../../types'
-import { educationService } from '../../services/resumeService'
 
 interface EducationFormProps {
     resumeId: number
     resume: any
 }
 
-export default function EducationForm({ resumeId }: EducationFormProps) {
+export default function EducationForm({ resumeId: _resumeId }: EducationFormProps) {
     const [educations, setEducations] = useState<Education[]>([])
-
-    const addEducationMutation = useMutation({
-        mutationFn: (data: Education) => educationService.addEducation(resumeId, data),
-    })
 
     const addEducation = () => {
         const newEducation: Education = {

@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronRight, ChevronLeft, Save, Eye, Sparkles, Loader2 } from 'lucide-react'
-import { Resume, ResumeCreateRequest } from '../types'
+import { ChevronRight, ChevronLeft, Save, Eye, Loader2 } from 'lucide-react'
+import { Resume, ResumeCreateRequest, TemplateType, ResumeStatus } from '../types'
 import { resumeService } from '../services/resumeService'
 import PersonalDetailsForm from '../components/resume-builder/PersonalDetailsForm'
 import ProfessionalSummaryForm from '../components/resume-builder/ProfessionalSummaryForm'
@@ -51,13 +51,18 @@ export default function ResumeBuilder() {
     const setInitialEmptyResume = () => {
         const emptyResume: Resume = {
             title: 'Untitled Resume',
-            templateType: 'MODERN' as any,
-            status: 'DRAFT' as any,
+            templateType: TemplateType.MODERN,
+            status: ResumeStatus.DRAFT,
             isDraft: true,
             workExperiences: [],
             educations: [],
             skills: [],
+            projects: [],
+            certifications: [],
+            languages: [],
+            socialLinks: [],
         }
+        console.log('Initialized empty resume', emptyResume)
     }
 
     const handleNext = () => {
@@ -81,7 +86,7 @@ export default function ResumeBuilder() {
             } else if (resume) {
                 const newResume = await createResumeMutation.mutateAsync({
                     title: 'New Resume',
-                    templateType: 'MODERN',
+                    templateType: TemplateType.MODERN,
                 })
                 if (newResume.id) {
                     navigate(`/builder/${newResume.id}`)

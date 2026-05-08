@@ -8,6 +8,7 @@ import ModernTemplate from '../components/templates/ModernTemplate'
 import MinimalTemplate from '../components/templates/MinimalTemplate'
 import CorporateTemplate from '../components/templates/CorporateTemplate'
 import CreativeTemplate from '../components/templates/CreativeTemplate'
+import OverleafTemplate from '../components/templates/OverleafTemplate'
 
 export default function ResumePreview() {
     const { id } = useParams<{ id: string }>()
@@ -46,6 +47,8 @@ export default function ResumePreview() {
                 return <CorporateTemplate resume={resume} />
             case TemplateType.CREATIVE:
                 return <CreativeTemplate resume={resume} />
+            case TemplateType.OVERLEAF:
+                return <OverleafTemplate resume={resume} />
             case TemplateType.MODERN:
             default:
                 return <ModernTemplate resume={resume} />

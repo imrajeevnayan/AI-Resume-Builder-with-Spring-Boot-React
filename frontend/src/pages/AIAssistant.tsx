@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { motion } from 'framer-motion'
-import { Sparkles, Loader2, Lightbulb, Target, TrendingUp, Award } from 'lucide-react'
+import { Sparkles, Loader2, TrendingUp } from 'lucide-react'
 import { aiService } from '../services/resumeService'
 
 export default function AIAssistant() {

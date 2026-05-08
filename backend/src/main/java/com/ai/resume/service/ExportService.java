@@ -49,7 +49,7 @@ public class ExportService {
             html.append("<strong>").append(details.getFullName()).append("</strong><br>");
             html.append(details.getEmail()).append("<br>");
             html.append(details.getPhone()).append("<br>");
-            html.append(details.getLocation()).append("</div>");
+            html.append(details.getCity()).append(", ").append(details.getCountry()).append("</div>");
         }
         html.append("</div>");
 

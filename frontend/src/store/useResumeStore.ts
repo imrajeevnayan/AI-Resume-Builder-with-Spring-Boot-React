@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { Resume, TemplateType } from '../types'
+import { Resume } from '../types'
 
 interface ResumeState {
     currentResume: Resume | null

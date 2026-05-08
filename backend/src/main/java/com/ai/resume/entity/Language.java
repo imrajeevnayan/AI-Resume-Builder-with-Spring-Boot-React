@@ -1,5 +1,6 @@
 package com.ai.resume.entity;
 
+import com.ai.resume.enums.ProficiencyLevel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

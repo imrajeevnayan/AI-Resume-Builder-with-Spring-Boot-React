@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { motion } from 'framer-motion'
+import { useMutation } from '@tanstack/react-query'
 import { Loader2, Save, Sparkles } from 'lucide-react'
 import { professionalSummaryService } from '../../services/resumeService'
 import { aiService } from '../../services/resumeService'

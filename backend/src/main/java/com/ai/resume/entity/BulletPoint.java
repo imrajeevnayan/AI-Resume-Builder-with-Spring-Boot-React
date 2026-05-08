@@ -18,6 +18,10 @@ public class BulletPoint {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "work_experience_id")
+    private WorkExperience workExperience;
+
     @Column(name = "parent_id", nullable = false)
     private Long parentId;
 

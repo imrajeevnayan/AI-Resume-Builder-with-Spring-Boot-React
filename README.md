@@ -39,7 +39,7 @@ AI Resume Builder is a **production-ready, open-source resume and CV generator**
 | **Data Privacy** | Stored locally (H2) | Cloud storage |
 | **AI Features** | Summary, skills, ATS | Limited / premium only |
 | **Export** | PDF, JSON, print | Usually PDF only |
-| **Templates** | 4 professional designs | 1-2 free, rest paid |
+| **Templates** | 5 professional designs | 1-2 free, rest paid |
 
 ---
 
@@ -63,6 +63,7 @@ AI Resume Builder is a **production-ready, open-source resume and CV generator**
 | **Minimal** | Clean typography | Creative, freelance |
 | **Corporate** | Blue accents, formal | Finance, consulting |
 | **Creative** | Vibrant gradients | Design, marketing |
+| **Overleaf** | Classic Serif, LaTeX style | Academic, Research |
 
 ### AI-Powered Tools
 - **Summary Generator** - Creates professional summaries from role + experience
@@ -384,7 +385,7 @@ http://localhost:8080/swagger-ui.html
 │ id (PK)          │ BIGSERIAL                                │
 │ title            │ VARCHAR(255)                             │
 │ template_type    │ ENUM (MODERN, MINIMAL, CORPORATE,        │
-│                  │          CREATIVE)                        │
+│                  │          CREATIVE, OVERLEAF)              │
 │ status           │ ENUM (DRAFT, READY, ARCHIVED)             │
 │ is_draft         │ BOOLEAN                                  │
 │ created_at       │ TIMESTAMP                                │
@@ -680,7 +681,8 @@ spring:
 │         │         ├──  ModernTemplate.tsx     # Modern resume template
 │         │         ├──  MinimalTemplate.tsx     # Minimal resume template
 │         │         ├──  CorporateTemplate.tsx   # Corporate resume template
-│         │         └──  CreativeTemplate.tsx    # Creative resume template
+│         │         ├──  CreativeTemplate.tsx    # Creative resume template
+│         │         └──  OverleafTemplate.tsx    # LaTeX (Overleaf) template
 │         │
 │         └──  hooks/
 │              └──  (Custom React hooks)

@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Trash2, Wrench, Loader2, Sparkles } from 'lucide-react'
 import { Skill, ProficiencyLevel } from '../../types'
-import { skillService } from '../../services/resumeService'
 import { aiService } from '../../services/resumeService'
 
 interface SkillsFormProps {
@@ -11,13 +9,9 @@ interface SkillsFormProps {
     resume: any
 }
 
-export default function SkillsForm({ resumeId }: SkillsFormProps) {
+export default function SkillsForm({ resumeId: _resumeId }: SkillsFormProps) {
     const [skills, setSkills] = useState<Skill[]>([])
     const [isSuggesting, setIsSuggesting] = useState(false)
-
-    const addSkillMutation = useMutation({
-        mutationFn: (data: Skill) => skillService.addSkill(resumeId, data),
-    })
 
     const addSkill = () => {
         const newSkill: Skill = {

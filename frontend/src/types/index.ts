@@ -4,6 +4,7 @@ export enum TemplateType {
     MINIMAL = 'MINIMAL',
     CORPORATE = 'CORPORATE',
     CREATIVE = 'CREATIVE',
+    OVERLEAF = 'OVERLEAF',
 }
 
 export enum ResumeStatus {
